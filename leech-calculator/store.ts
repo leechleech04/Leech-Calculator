@@ -18,9 +18,7 @@ const formulaAndAnswer = createSlice({
       }
       if (state.answer.toString().includes('.') && action.payload === 0) {
         state.answer = state.answer.toString() + action.payload;
-        return;
-      }
-      if (state.answer === 0) {
+      } else if (state.answer === 0) {
         state.answer = action.payload;
       } else {
         state.answer = Number(
@@ -48,9 +46,7 @@ const formulaAndAnswer = createSlice({
       if (state.formula.endsWith('=')) {
         state.formula = state.answer.toString() + action.payload;
         state.answer = 0;
-        return;
-      }
-      if (isNaN(Number(state.formula.slice(-1)))) {
+      } else if (isNaN(Number(state.formula.slice(-1)))) {
         const match = state.formula.match(/^-?\d*\.?\d+/);
         if (match) {
           const firstNumber = match[0];

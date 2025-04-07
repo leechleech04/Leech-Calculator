@@ -18,7 +18,7 @@ const ModalBox = styled.View`
   background-color: ${colors.blue};
   top: 50%;
   left: 50%;
-  padding: 30px 20px;
+  padding: 30px 0;
   padding-bottom: 10px;
   border-radius: 10px;
   justify-content: center;
@@ -32,6 +32,7 @@ const ModalText = styled.Text`
   font-size: 24px;
   color: ${colors.white};
   font-weight: 700;
+  padding: 0 30px;
 `;
 
 const ModalButton = styled.TouchableOpacity`
@@ -83,7 +84,9 @@ export default function Warning() {
             transform: [{ translateX: '-50%' }, { translateY: '-50%' }],
           }}
         >
-          <ModalText>계산 결과가{'\n'}허용 범위를 초과했습니다.</ModalText>
+          <ModalText>
+            계산 결과가{'\n'}허용 범위를{'\n'}초과했습니다.
+          </ModalText>
           <ModalButton onPress={closeModal}>
             <ButtonText>닫기</ButtonText>
           </ModalButton>
