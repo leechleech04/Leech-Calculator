@@ -12,10 +12,20 @@ const formulaAndAnswer = createSlice({
       state.answer = 0;
     },
     pressNumber: (state, action) => {
+      if (state.formula.endsWith('=')) {
+        state.formula = '';
+        state.answer = 0;
+      }
+      if (state.answer.toString().includes('.') && action.payload === 0) {
+        state.answer = state.answer.toString() + action.payload;
+        return;
+      }
       if (state.answer === 0) {
-        state.answer = Number(action.payload);
+        state.answer = action.payload;
       } else {
-        state.answer = Number(state.answer.toString() + action.payload);
+        state.answer = Number(
+          state.answer.toString() + action.payload.toString()
+        );
       }
     },
     pressClearEntry: (state) => {
@@ -34,7 +44,11 @@ const formulaAndAnswer = createSlice({
     pressOperator: (state, action) => {
       if (state.answer.toString().endsWith('.')) {
         state.answer = Number(state.answer.toString().slice(0, -1));
-        console.log(state.answer);
+      }
+      if (state.formula.endsWith('=')) {
+        state.formula = state.answer.toString() + action.payload;
+        state.answer = 0;
+        return;
       }
       if (isNaN(Number(state.formula.slice(-1)))) {
         const match = state.formula.match(/^-?\d*\.?\d+/);
@@ -45,31 +59,26 @@ const formulaAndAnswer = createSlice({
               state.formula =
                 (Number(firstNumber) % state.answer).toString() +
                 action.payload;
-              state.answer = Number(state.formula);
               break;
             case '÷':
               state.formula =
                 (Number(firstNumber) / state.answer).toString() +
                 action.payload;
-              state.answer = Number(state.formula);
               break;
             case '×':
               state.formula =
                 (Number(firstNumber) * state.answer).toString() +
                 action.payload;
-              state.answer = Number(state.formula);
               break;
             case '-':
               state.formula =
                 (Number(firstNumber) - state.answer).toString() +
                 action.payload;
-              state.answer = Number(state.formula);
               break;
             case '+':
               state.formula =
                 (Number(firstNumber) + state.answer).toString() +
                 action.payload;
-              state.answer = Number(state.formula);
               break;
           }
         }
@@ -100,6 +109,9 @@ const formulaAndAnswer = createSlice({
       }
     },
     pressEqual: (state) => {
+      if (state.answer.toString().endsWith('.')) {
+        state.answer = Number(state.answer.toString().slice(0, -1));
+      }
       const match = state.formula.match(/^-?\d*\.?\d+/);
       const lastNumber = state.answer;
       if (match) {
