@@ -50,7 +50,7 @@ const ButtonText = styled.Text`
   font-weight: 600;
 `;
 
-export default function Warning() {
+const Warning = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const dispatch = useDispatch();
@@ -94,4 +94,6 @@ export default function Warning() {
       </Container>
     </Modal>
   );
-}
+};
+
+export default Warning;

@@ -41,7 +41,7 @@ const ButtonRow = styled.View`
   flex: 1;
 `;
 
-export default function ButtonPad() {
+const ButtonPad = () => {
   const dispatch = useDispatch();
 
   const onPressNumber = (number: number) => {
@@ -286,4 +286,6 @@ export default function ButtonPad() {
       </ButtonRow>
     </Container>
   );
-}
+};
+
+export default ButtonPad;

@@ -9,7 +9,7 @@ const Container = styled.View`
   flex: 1;
 `;
 
-export default function App() {
+const App = () => {
   return (
     <Provider store={store}>
       <Container>
@@ -19,4 +19,6 @@ export default function App() {
       </Container>
     </Provider>
   );
-}
+};
+
+export default App;

@@ -20,7 +20,7 @@ const Answer = styled.Text`
   font-size: 72px;
 `;
 
-export default function AnswerContainer() {
+const AnswerContainer = () => {
   const formulaAndAnswer = useSelector(
     (state: { formulaAndAnswer: { formula: string; answer: number } }) =>
       state.formulaAndAnswer
@@ -31,4 +31,6 @@ export default function AnswerContainer() {
       <Answer>{formulaAndAnswer.answer}</Answer>
     </Container>
   );
-}
+};
+
+export default AnswerContainer;
